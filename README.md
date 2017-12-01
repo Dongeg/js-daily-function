@@ -149,4 +149,21 @@ function getUrlParam(name,url){
     if (r != null) return (r[2]);
 }
 
+
+
+/**
+*有数据导出直接将接口写在 window.location.href中
+*
+*/
+function exportData() {
+    var postData  = {
+        userName:this.pSearchData.userName,
+        deptCode:this.pSearchData.deptCode,
+        startDateStr:this.pSearchData.startDateStr,
+        endDateStr:this.pSearchData.endDateStr,
+    }
+    var str = transParams(postData)
+    window.location.href = curPath + '/minstone/reportStatis/exportManStatisExcel?'+str;
+    
+},
 ```
