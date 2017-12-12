@@ -152,18 +152,34 @@ function getUrlParam(name,url){
 
 
 /**
-*有数据导出直接将接口写在 window.location.href中
+*window.location.href 下载文件
 *
 */
-function exportData() {
-    var postData  = {
-        userName:this.pSearchData.userName,
-        deptCode:this.pSearchData.deptCode,
-        startDateStr:this.pSearchData.startDateStr,
-        endDateStr:this.pSearchData.endDateStr,
-    }
-    var str = transParams(postData)
-    window.location.href = curPath + '/minstone/reportStatis/exportManStatisExcel?'+str;
+function exportData(url) {
+    window.location.href = url
     
-},
+}
+
+/*
+ * post请求下载文件
+ * options:{
+ *   url:'',  //下载地址
+ *   data:{name:value}, //要发送的数据
+ *   method:'post'
+ * }
+ */
+var postDownLoadFile = function (options) {
+    var config = $.extend(true, { method: 'post' }, options);
+    var $iframe = $('<iframe id="down-file-iframe" />');
+    var $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
+    $form.attr('action', config.url);
+    for (var key in config.data) {
+        $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
+    }
+    $iframe.append($form);
+    $(document.body).append($iframe);
+    $form[0].submit();
+    $iframe.remove();
+}
+
 ```
