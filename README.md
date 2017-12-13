@@ -57,7 +57,26 @@ function deepCopy(obj){
 	}
 	return newObj
 }
-
+/**
+ * 返回一个数组的深复制
+ * @param {array}
+ * @returns {array}
+ **/
+ // 方法一
+ function arrDeepCopy (items){
+    var len = items.length;
+    var itemsCopy = [];
+    var i;
+    for (i = 0; i < len; i++) {
+      itemsCopy[i] = items[i];
+    }
+    return itemsCopy
+}
+// 方法二（es6）
+function arrDeepCopy (items) {
+    const itemsCopy = [...items]
+    return itemsCopy
+}
 /**
  * 返回传入日期的下一天
  * @param   {string}  2017-11-23
