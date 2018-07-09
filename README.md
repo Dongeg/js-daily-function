@@ -171,7 +171,7 @@ function getWeek(dateString) {
 /**
 *获取当前链接中的参数
 *@param {string} name 要获取的参数名
-*@param {function} url   decodeURI(window.location)    传入这个参数可以正确的显示参数中的汉字
+*@param {function} url   decodeURI(window.location)    转译链接中的中文字符 window.parent.location则获取父窗口链接
 *@returns {string} 
 */
 function getUrlParam(name,url){
@@ -212,6 +212,16 @@ var postDownLoadFile = function (options) {
     $(document.body).append($iframe);
     $form[0].submit();
     $iframe.remove();
+}
+// 判断字符串是否只包含空格或者为空或特殊字符
+function isOnlySpace(str) {
+    var reg = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+    if(str.length == 0 || !/[^\s]/.test(str) || reg.test(str)){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 ```
