@@ -224,4 +224,105 @@ function isOnlySpace(str) {
     }
 }
 
+/**
+ * 根据日期字符串获取星期几
+ * @param {dateString} 日期字符串（如：2016-12-29），为空时为用户电脑当前日期
+ * @returns {String}
+ */
+function getWeek(dateString) {
+    var date;
+    if(isNull(dateString)){
+        date = new Date();
+    }else{
+        var dateArray = dateString.split("-");
+        date = new Date(dateArray[0], parseInt(dateArray[1] - 1), dateArray[2]);
+    }
+    //var weeks = new Array("日", "一", "二", "三", "四", "五", "六");
+    //return "星期" + weeks[date.getDay()];
+    return "星期" + "日一二三四五六".charAt(date.getDay());
+}
+/**
+ * 获取当前月份
+ *@returns {String}
+ * */
+function getNowMounth() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = year + seperator1 + month
+    
+    return currentdate;
+}
+/**
+ * 获取当前日期
+ *@returns {String}
+ * */
+function getNowDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = year + seperator1 + month + seperator1 + strDate
+    
+    return currentdate;
+}
+/**
+ * laydate如果是选择月份的话，选完日期主体不会自动关闭，要在回调函数中手动点击对应确定按钮
+ * @param laydateCtn 当前要关闭的laydate的id
+ * */
+function layDateConfirm (laydateCtn) {
+    var laydateBtn=$(laydateCtn).find(".laydate-btns-confirm")[0]
+    $(laydateBtn).click()
+}
+/**
+ * 从日期字符串中获取月份
+ * @param {string}  2017-12-07
+ * @returns {string} 2017-12
+ * */
+function getMonthFromDate (date) {
+	var month = date.substring(0,7)
+	return month
+}
+/**
+ * 存储LocalStorage
+ * @param {string} key    {object} obj
+ * */
+function setLocalStorage (key,obj){
+	str = JSON.stringify(obj);
+	localStorage.setItem(key,str)	
+}
+/**
+ * 读取LocalStorage
+ * @param {string} key
+ * */
+function getLocalStorage (key){
+	var str = localStorage.getItem(key)
+	var obj = JSON.parse(str)
+	return obj
+}
+/**
+ * 检查LocalStorage 是否有值
+ * @param {string} key
+ * */
+function checkLocalStorage (key){
+	return localStorage.hasOwnProperty(key)
+}
+
 ```
