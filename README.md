@@ -90,6 +90,12 @@ function arrDeepCopy (items) {
     const itemsCopy = [...items]
     return itemsCopy
 }
+//方法三
+const a1 = [1, 2];
+const a2 = a1.concat();
+
+a2[0] = 2;
+a1 // [1, 2]
 /**
  * 返回传入日期的下一天
  * @param   {string}  2017-11-23
