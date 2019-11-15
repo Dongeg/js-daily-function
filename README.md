@@ -2,6 +2,47 @@
 js常用方法
 
 ```js
+
+
+
+            // vue 防抖实例
+            searchHistory(key,value,index){
+                console.log(this.$refs['pj'+index])
+                if(this.timer){
+                    clearTimeout(this.timer)
+                }
+                this.timer = setTimeout(()=>{
+                    let _data = {
+                        Limit:this.Limit,
+                    }
+                    _data[key] = value
+                    this.$util.axiosGet({
+                        url:'/api/InquiryOrder/GetVehicleSeriesList',
+                        data:_data,
+                        hideLoading:true,
+                    }).then((res)=>{
+                        this.historyList = res.data
+                        this.showHistory = true
+                        if(res.data.length > 0){
+                            this.historyNoData = false
+                        }
+                    })
+                },this.wait)
+
+            },
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * 获取当前标准日期格式的年月日时分秒
  *@returns {String}  "2017-12-01 10:8:40"
